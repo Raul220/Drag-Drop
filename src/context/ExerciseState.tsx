@@ -4,6 +4,7 @@ import ExerciseReducer, { updateDataResponseActions } from "./ExerciseReducer";
 
 export interface ExerciseDataState {
     animals: string[];
+    solved: 'ok' | 'wrong' | 'unsolved';
 }
 
 export interface State {
@@ -18,10 +19,13 @@ export interface Store {
 }
 
 const initialState: State = {
-    exerciseData: {animals: ['Cangrejo', 'Venado', 'Perro', 'Gato', 'Alcon']},
+    exerciseData: {
+        animals: ['Cangrejo', 'Venado', 'Perro', 'Gato', 'Alcon'],
+        solved: 'unsolved',
+    },
 };
 
-const ExerciseContext = createContext<Store>({state: initialState});
+const ExerciseContext = createContext<Store>({ state: initialState });
 export const useExerciseContext = () => useContext(ExerciseContext);
 
 const ExerciseState: React.FC<PropsWithChildren> = (props) => {
