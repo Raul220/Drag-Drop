@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { ReactSortable } from "react-sortablejs";
 import { useExerciseContext } from "../context/ExerciseState";
 
-export interface ListToOrder {
+export interface ListToOrderElement {
   id: number;
   name: string;
 }
@@ -13,12 +13,21 @@ const Exercise = () => {
     state: { exerciseData },
     dispatch,
   } = useExerciseContext();
-  const [exerciseList, setExerciseList] = useState<ListToOrder[]>([]);
+  const [exerciseList, setExerciseList] = useState<ListToOrderElement[]>([]);
 
-  // useEffect(() => {
-  //   debugger
-  //   // setList(shuffle(exerciseData.animals));
-  // }, [list]);
+  useEffect(() => {
+    debugger;
+    let listToExercise: ListToOrderElement[] = []
+    const list: string[] = shuffle(exerciseData.animals);
+    list.forEach((element, index) => {
+      const item: ListToOrderElement = {
+        id: index,
+        name: element,
+      }
+      listToExercise.push(item);
+    });
+    setExerciseList(listToExercise);
+  }, []);
 
   /**
    * Dado un arreglo cambiar orden al azar
