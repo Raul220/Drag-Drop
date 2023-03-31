@@ -20,7 +20,7 @@ export interface Store {
 
 const initialState: State = {
     exerciseData: {
-        animals: ['Cangrejo', 'Venado', 'Perro', 'Gato', 'Alcon'],
+        animals: ['Alcon', 'Cangrejo', 'Gato', 'Perro','Venado' ],
         solved: 'unsolved',
     },
 };
