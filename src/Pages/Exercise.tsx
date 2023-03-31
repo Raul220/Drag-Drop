@@ -2,7 +2,7 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import { ReactSortable } from "react-sortablejs";
 import { useExerciseContext } from "../context/ExerciseState";
-import styled from 'styled-components';
+import "./Exercise.scss";
 
 export interface ListToOrderElement {
   id: number;
@@ -29,6 +29,10 @@ const Exercise = () => {
     setExerciseList(listToExercise);
   }, []);
 
+  const save = (): void => {
+
+  }
+
   /**
    * Dado un arreglo cambiar orden al azar
    * @param array lista a sortear
@@ -46,16 +50,18 @@ const Exercise = () => {
   }
 
   return (
-    <div>
+    <div className="container-exercise">
       <h3>Ordena alfabeticamente los siguientes animales.</h3>
-      <ReactSortable list={exerciseList} setList={setExerciseList}>
+      <ReactSortable list={exerciseList} setList={setExerciseList} className="sortable-list">
         {
           exerciseList.map((item, index) => (
-            <span key={index}>{item.name}</span>
+            <span key={index} className="list-item" >{item.name}</span>
           ))
         }
 
       </ReactSortable>
+
+      <button className="save-btn" onClick={save}>Guardar</button>
     </div>
   );
 };
