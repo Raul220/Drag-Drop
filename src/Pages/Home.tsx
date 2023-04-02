@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import LinkComponent from "../components/LinkComponent/LinKComponent";
 import { useExerciseContext } from "../context/ExerciseState";
 
 const Home = () => {
@@ -15,16 +16,8 @@ const Home = () => {
 
   return (
     <div className="nav">
-      <NavLink to={!exerciseData.solved ? "/exercise" : ''}>Ejercicio</NavLink>
-      <NavLink to={!!exerciseData.solved ? "/preview" : ''}>Comprobación</NavLink>
-
-      <ol>
-        {
-          exerciseData.animals.map((item, index) => (
-            <li key={index}>{item.name}</li>
-          ))
-        }
-      </ol>
+      <LinkComponent url={!exerciseData.solved ? "/exercise" : ''} text="Ejercicio" disabled={exerciseData.solved} />
+      <LinkComponent url={!!exerciseData.solved ? "/check" : ''} text="Revisar" disabled={!exerciseData.solved} />
     </div>
   );
 };
