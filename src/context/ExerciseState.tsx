@@ -1,11 +1,7 @@
 import { createContext, PropsWithChildren, useContext, useReducer } from "react";
-import ExerciseReducer, { updateDataResponseActions } from "./ExerciseReducer";
-
-
-export interface ExerciseDataState {
-    animals: string[];
-    solved: 'ok' | 'wrong' | 'unsolved';
-}
+import _default from "react-bootstrap/esm/Accordion";
+import { DEFAULT_EXERCISE_DATA } from "../constants/variables";
+import ExerciseReducer, { UpdateDataResponseActions } from "./ExerciseReducer";
 
 export interface State {
     exerciseData: ExerciseDataState;
@@ -14,15 +10,12 @@ export interface State {
 export interface Store {
     state: State;
     dispatch?: React.Dispatch<
-        | updateDataResponseActions
+         UpdateDataResponseActions
     >;
 }
 
 const initialState: State = {
-    exerciseData: {
-        animals: ['Alcon', 'Cangrejo', 'Gato', 'Perro','Venado' ],
-        solved: 'unsolved',
-    },
+    exerciseData: DEFAULT_EXERCISE_DATA,
 };
 
 const ExerciseContext = createContext<Store>({ state: initialState });
@@ -37,3 +30,5 @@ const ExerciseState: React.FC<PropsWithChildren> = (props) => {
         </ExerciseContext.Provider>
     );
 }
+
+export default ExerciseState;

@@ -1,14 +1,12 @@
-import { ExerciseDataState, State } from "./ExerciseState";
+import { State } from "./ExerciseState";
 
-
-
-export interface updateDataResponseActions {
+export interface UpdateDataResponseActions {
     type: 'UPDATE_DATA_RESPONSE';
     payload: ExerciseDataState;
 }
 
 type Action =
-    | updateDataResponseActions
+    | UpdateDataResponseActions
     ;
 
 const ExerciseReducer = (state: State, action: Action): State => {
@@ -17,7 +15,9 @@ const ExerciseReducer = (state: State, action: Action): State => {
             return {
                 ...state,
                 exerciseData: action.payload,
-            }
+            };
+        default:
+            return state;
     }
 
 }

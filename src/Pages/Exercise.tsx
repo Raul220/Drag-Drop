@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import { ReactSortable } from "react-sortablejs";
 import { useExerciseContext } from "../context/ExerciseState";
 import "./Exercise.scss";
@@ -10,15 +11,20 @@ export interface ListToOrderElement {
 }
 
 const Exercise = () => {
+  const navigate = useNavigate();
   const {
-    state: { exerciseData },
     dispatch,
+    state: { exerciseData },
   } = useExerciseContext();
   const [exerciseList, setExerciseList] = useState<ListToOrderElement[]>([]);
+  const [correctList, setCorrectList] = useState<ItemListResponse[]>([]);
 
   useEffect(() => {
+    setCorrectList(exerciseData.animals);
     let listToExercise: ListToOrderElement[] = []
-    const list: string[] = shuffle(exerciseData.animals);
+    let animalNames: string[] = [];
+    exerciseData.animals.forEach(e => animalNames.push(e.name));
+    const list: string[] = shuffle(animalNames);
     list.forEach((element, index) => {
       const item: ListToOrderElement = {
         id: index,
@@ -28,9 +34,29 @@ const Exercise = () => {
     });
     setExerciseList(listToExercise);
   }, []);
+  useEffect(() => console.log(exerciseData), [exerciseData])
 
-  const save = (): void => {
-
+  const save = () => {
+    let array: ItemListResponse[] = [];
+    exerciseList.forEach((element, index) => {
+      const item: ItemListResponse = {
+        name: element.name,
+        valid: element.name === correctList[index].name ? 1 : 0,
+      }
+      array.push(item);
+    });
+    const response: ExerciseDataState = {
+      animals: array,
+      solved: true,
+    }
+    if (dispatch) {
+      dispatch({
+        type: 'UPDATE_DATA_RESPONSE',
+        payload: response
+      });
+    }
+    console.log(exerciseData);
+    navigate('/');
   }
 
   /**
