@@ -2,6 +2,7 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { ReactSortable } from "react-sortablejs";
+import LinkComponent from "../components/LinkComponent/LinKComponent";
 import { useExerciseContext } from "../context/ExerciseState";
 import "./Exercise.scss";
 
@@ -75,7 +76,7 @@ const Exercise = () => {
     return array;
   }
 
-  return (
+  return !exerciseData.solved ? (
     <div className="container-exercise">
       <h3>Ordena alfabeticamente los siguientes animales.</h3>
       <ReactSortable list={exerciseList} setList={setExerciseList} className="sortable-list">
@@ -86,9 +87,11 @@ const Exercise = () => {
         }
 
       </ReactSortable>
-
       <button className="save-btn" onClick={save}>Guardar</button>
+
     </div>
+  ) : (
+    <h1 style={{ textAlign: "center", color: 'red', marginTop: 100 }}> Acceso denegado</h1>
   );
 };
 

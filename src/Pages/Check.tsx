@@ -14,9 +14,9 @@ const Check = () => {
   const rightElements: number = exerciseData.animals.filter(e => e.valid).length;
   const percent: number = rightElements*100/5;
 
-  return (
+  return exerciseData.solved ? (
     <div className="container-response">
-      <h3>{percent == 100 ? "¡Felicidades! Acertaste en todas." : (percent ? `Conseguiste responder el ${percent}% correctamente.`:'No acertaste en ninguna posición.')}</h3>
+      <h3 style={{color: percent > 50 ? 'green': 'red'}}>{percent == 100 ? "¡Felicidades! Acertaste en todas." : (percent ? `Conseguiste responder el ${percent}% correctamente.`:'No acertaste en ninguna posición.')}</h3>
       <ul>
         {
             exerciseData.animals.map((item, index) => (
@@ -31,6 +31,8 @@ const Check = () => {
       <LinkComponent url="/" text="Atrás" />   
       
     </div>
+  ) : (
+    <h1 style={{ textAlign: "center", color: 'red', marginTop: 100 }}> Acceso denegado</h1>
   );
 };
 

@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import LinkComponent from "../components/LinkComponent/LinKComponent";
 import { useExerciseContext } from "../context/ExerciseState";
+import "./Home.scss";
 
 const Home = () => {
   const {
